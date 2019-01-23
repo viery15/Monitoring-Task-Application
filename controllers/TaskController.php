@@ -485,9 +485,8 @@ class TaskController extends Controller
         $model->task_id = $data['id'];
         $model->comments = $data['comment'];
 //        $model->attachments = '';
-//        $model->timestamp = date('m-d-Y H:i:s');
+        $model->created_at = date('m-d-Y H:i:s');
         $model->save();
-
         $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
 
         return $this->render('comment',array(

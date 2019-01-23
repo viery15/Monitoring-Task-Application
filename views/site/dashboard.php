@@ -330,12 +330,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             <!--                        </button>-->
 
                             <div class="row">
-                                <div class="col-md-4 col-sm-4" style="margin: 4px">
+                                <div class="col-md-3 col-sm-3" style="margin: 4px">
                                     <?= Html::a('<span class="glyphicon glyphicon-ok">Approve</span>', Url::to(['task/approve', 'id' => $row['id']]),
                                         [
                                             'title' => Yii::t('app', 'Approve'),
                                             'data-pjax' => '1',
-                                            'class' => 'btn btn-success  btn-sm',
+                                            'class' => 'btn btn-success',
                                             'data-toggle'=> 'modal',
                                             'data-target'=> 'modal-approve',
                                             'id' => 'BtnModalId',
@@ -364,6 +364,18 @@ $this->params['breadcrumbs'][] = $this->title;
                                     );
                                     ?>
                                 </div>
+                                <div class="col-md-4 col-sm-4" style="margin: 2px">
+                                    <?=
+                                    Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                        [
+                                            'title' => Yii::t('app', 'Comment'),
+                                            'data-pjax' => '1',
+                                            'class' => 'btn btn-success btn-comment',
+                                            'id' => $row['id']
+                                        ]
+                                    );
+                                    ?>
+                                </div>
                             </div>
                             <!--                        <button type="button" class="btn btn-danger btn-sm">-->
                             <!--                            <i class="glyphicon glyphicon-remove"></i> Reject-->
@@ -378,12 +390,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             <!--                            <button type="button" class="btn btn-success btn-sm">-->
                             <!--                                <i class="glyphicon glyphicon-saved"></i> Done-->
                             <!--                            </button>-->
+                       <div class="row">
+                            <div class="col-md-4 col-sm-4" style="margin: 2px">
                             <?=
                             Html::a('<span class="glyphicon glyphicon-saved">Done</span>', Url::to(['task/done', 'id' => $row['id']]),
                                 [
                                     'title' => Yii::t('app', 'Done'),
                                     'data-pjax' => '1',
-                                    'class' => 'btn btn-primary btn-sm',
+                                    'class' => 'btn btn-primary',
                                     'data' => [
                                         'method' => 'post',
                                         'confirm' => Yii::t('app', 'Are you sure ?'),
@@ -392,7 +406,20 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             );
                             ?>
-
+                             </div>
+                            <div class="col-md-4 col-sm-4" style="margin: 2px">
+                                <?=
+                                Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                    [
+                                        'title' => Yii::t('app', 'Comment'),
+                                        'data-pjax' => '1',
+                                        'class' => 'btn btn-success btn-comment',
+                                        'id' => $row['id']
+                                    ]
+                                );
+                                ?>
+                            </div>
+                       </div>
                         <?php } ?>
 
                         <?php
@@ -458,12 +485,14 @@ $this->params['breadcrumbs'][] = $this->title;
                             <!--                            <button type="button" class="btn btn-warning btn-sm">-->
                             <!--                                <i class="glyphicon glyphicon-repeat"></i> Resend Request-->
                             <!--                            </button>-->
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5" style="margin: 2px">
                             <?=
                             Html::a('<span class="glyphicon glyphicon-repeat"></span> Resend Task', Url::to(['task/request', 'id' => $row['id']]),
                                 [
                                     'title' => Yii::t('app', 'Resend Task'),
                                     'data-pjax' => '1',
-                                    'class' => 'btn btn-warning  btn-sm',
+                                    'class' => 'btn btn-warning',
                                     'data' => [
                                         'method' => 'post',
                                         'confirm' => Yii::t('app', 'Are you sure ?'),
@@ -472,18 +501,81 @@ $this->params['breadcrumbs'][] = $this->title;
                                 ]
                             );
                             ?>
+                            </div>
+                            <div class="col-md-5 col-sm-5" style="margin: 2px">
+                            <?=
+                            Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                [
+                                    'title' => Yii::t('app', 'Comment'),
+                                    'data-pjax' => '1',
+                                    'class' => 'btn btn-success btn-comment',
+                                    'id' => $row['id']
+                                ]
+                            );
+                            ?>
+                            </div>
+                        </div>
 
                         <?php } ?>
-                        <!--                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">-->
-                        <!--                            <i class="glyphicon glyphicon-cog"></i> <span class="caret"></span>-->
-                        <!--                        </button>-->
-                        <!--                        <ul class="dropdown-menu" role="menu">-->
-                        <!--                            <li><a href="#">Action</a></li>-->
-                        <!--                            <li><a href="#">Another action</a></li>-->
-                        <!--                            <li><a href="#">Something else here</a></li>-->
-                        <!--                            <li class="divider"></li>-->
-                        <!--                            <li><a href="#">Separated link</a></li>-->
-                        <!--                        </ul>-->
+
+                        <?php
+                            if ($row['status'] == 'Done' && $row['user_to'] == $session['user']['username']) {
+                        ?>
+                                <?=
+                                Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                    [
+                                        'title' => Yii::t('app', 'Comment'),
+                                        'data-pjax' => '1',
+                                        'class' => 'btn btn-success btn-comment',
+                                        'id' => $row['id']
+                                    ]
+                                );
+                                ?>
+                        <?php } ?>
+
+                        <?php
+                        if ($row['status'] == 'Approved' && $row['user_from'] == $session['user']['username']) {
+                            ?>
+                            <?=
+                            Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                [
+                                    'title' => Yii::t('app', 'Comment'),
+                                    'data-pjax' => '1',
+                                    'class' => 'btn btn-success btn-comment',
+                                    'id' => $row['id']
+                                ]
+                            );
+                            ?>
+                        <?php } ?>
+
+                        <?php
+                        if ($row['status'] == 'Done' && $row['user_from'] == $session['user']['username']) {
+                            ?>
+                            <?=
+                            Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                [
+                                    'title' => Yii::t('app', 'Comment'),
+                                    'data-pjax' => '1',
+                                    'class' => 'btn btn-success btn-comment',
+                                    'id' => $row['id']
+                                ]
+                            );
+                            ?>
+                        <?php } ?>
+                        <?php
+                        if ($row['status'] == 'Rejected' && $row['user_to'] == $session['user']['username']) {
+                            ?>
+                            <?=
+                            Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                [
+                                    'title' => Yii::t('app', 'Comment'),
+                                    'data-pjax' => '1',
+                                    'class' => 'btn btn-success btn-comment',
+                                    'id' => $row['id']
+                                ]
+                            );
+                            ?>
+                        <?php } ?>
                     </div>
                 </div>
             </div>

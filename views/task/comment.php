@@ -169,10 +169,12 @@
 <div class='container'>
     <?php
         foreach ($data_comment as $data_comment) {
+            $timestamp = strtotime($data_comment['created_at']);
+            $new_date = date('d M Y h:i A', $timestamp);
     ?>
     <div class="media comment-box" style="width: 73%">
         <div class="media-body">
-            <h4 class="media-heading"><?= $data_comment['user_comment']; ?></h4>
+            <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
             <p><?= $data_comment['comments']; ?></p>
         </div>
     </div>

@@ -12,7 +12,7 @@ use Yii;
  * @property string $task_id
  * @property string $comments
  * @property string $attachments
- * @property string $timestamp
+ * @property string $created_at
  */
 class Comment extends \yii\db\ActiveRecord
 {
@@ -33,7 +33,7 @@ class Comment extends \yii\db\ActiveRecord
             [['user_comment', 'task_id', 'comments'], 'required'],
             [['user_comment', 'comments', 'attachments'], 'string'],
             [['task_id'], 'number'],
-            [['timestamp'], 'safe'],
+            [['created_at'], 'safe'],
         ];
     }
 
@@ -48,7 +48,7 @@ class Comment extends \yii\db\ActiveRecord
             'task_id' => 'Task ID',
             'comments' => 'Comments',
             'attachments' => 'Attachments',
-            'timestamp' => 'Timestamp',
+            'created_at' => 'Created At',
         ];
     }
 }

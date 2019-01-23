@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Task;
 use app\models\User;
+use app\models\Comment;
 use app\models\TaskSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -459,6 +460,39 @@ class TaskController extends Controller
             'data_progress' => $data_progress,
             'mystatus' => $mystatus,
             'nik' => $nik
+        ));
+    }
+
+    public function actionComment() {
+        $this->layout = false;
+        $data = Yii::$app->request->post();
+        $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
+
+        return $this->render('comment',array(
+            'id' => $data['id'],
+            'data_comment' => $data_comment,
+        ));
+    }
+
+    public function actionSubmitcomment(){
+        $this->layout = false;
+        $session = Yii::$app->session;
+        $session->open();
+        $data = Yii::$app->request->post();
+
+        $model = new Comment();
+        $model->user_comment = $session['user']['username'];
+        $model->task_id = $data['id'];
+        $model->comments = $data['comment'];
+//        $model->attachments = '';
+//        $model->timestamp = date('m-d-Y H:i:s');
+        $model->save();
+
+        $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
+
+        return $this->render('comment',array(
+            'id' => $data['id'],
+            'data_comment' => $data_comment,
         ));
     }
 }

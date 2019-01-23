@@ -404,7 +404,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             <!--                                <i class="glyphicon glyphicon-pencil"></i> Update-->
                             <!--                            </button>-->
                             <div class="row">
-                                <div class="col-md-5 col-sm-5" style="margin: 2px">
+                                <div class="col-md-4 col-sm-4" style="margin: 2px">
                                     <?= Html::button('<i class="glyphicon glyphicon-pencil"></i> Update', [
                                         'class' => 'btn btn-warning btnupdate',
                                         'id' => $row['id'],
@@ -412,7 +412,7 @@ $this->params['breadcrumbs'][] = $this->title;
                                         'data-target'=> 'create-task',
                                     ]) ?>
                                 </div>
-                                <div class="col-md-4 col-sm-4" style="margin: 2px">
+                                <div class="col-md-3 col-sm-3" style="margin: 2px;">
                                     <!--                                <button type="button" class="btn btn-danger btn-sm">-->
                                     <!--                                    <i class="glyphicon glyphicon-trash"></i> Delete-->
                                     <!--                                </button>-->
@@ -422,12 +422,28 @@ $this->params['breadcrumbs'][] = $this->title;
                                         [
                                             'title' => Yii::t('app', 'Delete'),
                                             'data-pjax' => '1',
-                                            'class' => 'btn btn-danger ',
+                                            'class' => 'btn btn-danger pull-right',
                                             'data' => [
                                                 'method' => 'post',
                                                 'confirm' => Yii::t('app', 'Are you sure ?'),
                                                 'pjax' => 1,
                                             ],
+                                        ]
+                                    );
+                                    ?>
+                                </div>
+                                <div class="col-md-4 col-sm-4" style="margin: 2px">
+                                    <!--                                <button type="button" class="btn btn-danger btn-sm">-->
+                                    <!--                                    <i class="glyphicon glyphicon-trash"></i> Delete-->
+                                    <!--                                </button>-->
+
+                                    <?=
+                                    Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
+                                        [
+                                            'title' => Yii::t('app', 'Comment'),
+                                            'data-pjax' => '1',
+                                            'class' => 'btn btn-success btn-comment',
+                                            'id' => $row['id']
                                         ]
                                     );
                                     ?>
@@ -500,10 +516,40 @@ Modal::begin([
 Modal::end();
 ?>
 
-<script type="text/javascript" language="JavaScript">
+<?php
+Modal::begin([
+    'header' => '<h4 id="head-comment"></h4>',
+    'id' => 'comment-modal',
+    'size' => 'modal-lg',
+]);
+?>
+    <div id="comment-content"></div>
+<?php
+Modal::end();
+?>
 
+<script type="text/javascript" language="JavaScript">
     var buttonmode;
     var id;
+
+    $("#comment-modal").on("hidden", function () {
+        alert('sukses');
+    });
+
+    $(".btn-comment").click(function(){
+        id = $(this).attr("id");
+        $("#head-comment").text('#'+id);
+        $.ajax({
+            url :  "<?php echo Yii::$app->request->baseUrl. '/task/comment' ?>",
+            type : 'post',
+            data : {id:id},
+            success : function(a) {
+                $('#comment-content').html(a);
+                $('#comment-modal').modal('show');
+            }
+        });
+    });
+
     $("#btntask").click(function(e){
         $("#form-add")[0].reset();
         buttonmode = 'Add New My Task';
@@ -556,8 +602,6 @@ Modal::end();
     });
 
 </script>
-
-
     <script>
         $(function () {
             Highcharts.setOptions({

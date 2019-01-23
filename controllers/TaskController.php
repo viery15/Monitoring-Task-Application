@@ -372,6 +372,8 @@ class TaskController extends Controller
     public function actionDelete($id)
     {
         $request = Yii::$app->request;
+        Comment::deleteAll('task_id = :id', [':id' => $id]);
+
         $this->findModel($id)->delete();
 
         if($request->isAjax){
@@ -419,7 +421,6 @@ class TaskController extends Controller
         }
 
     }
-
     /**
      * Finds the Task model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

@@ -70,3 +70,30 @@ CrudAsset::register($this);
     "footer"=>"",// always need it for jquery plugin
 ])?>
 <?php Modal::end(); ?>
+<?php
+Modal::begin([
+    'header' => '<h4 id="head-comment"></h4>',
+    'id' => 'comment-modal',
+    'size' => 'modal-lg',
+]);
+?>
+<div id="comment-content"></div>
+<?php
+Modal::end();
+?>
+
+<script type="text/javascript" language="JavaScript">
+    $(".btn-comment").click(function(){
+        var id = $(this).attr("id");
+        $("#head-comment").text('#'+id);
+        $.ajax({
+            url :  "<?php echo Yii::$app->request->baseUrl. '/task/comment' ?>",
+            type : 'post',
+            data : {id:id},
+            success : function(a) {
+                $('#comment-content').html(a);
+                $('#comment-modal').modal('show');
+            }
+        });
+    });
+</script>

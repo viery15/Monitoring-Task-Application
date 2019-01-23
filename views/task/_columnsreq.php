@@ -56,17 +56,18 @@ return [
     [
         'class' => 'kartik\grid\ActionColumn',
 
-        'width' => '100px',
+        'width' => '200px',
 
-        'template' => ' {delete}{request}{update}{view}',
+        'template' => ' {delete}{request}{update}{view}{comment}',
 //
         'buttons' => [
             'request' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Rejected') {
-                    return Html::a('<span class="glyphicon glyphicon-repeat">&nbsp;</span>', Url::to(['task/request', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['task/request', 'id' => $model->id]),
                         [
-                            'title' => Yii::t('app', 'Request'),
+                            'class' => 'btn btn-warning',
+                            'title' => Yii::t('app', 'Resend Request'),
                             'data-pjax' => '1',
                             'data' => [
                                 'method' => 'post',
@@ -80,8 +81,9 @@ return [
             'delete' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Pending') {
-                    return Html::a('<span class="glyphicon glyphicon-trash">&nbsp;</span>', Url::to(['task/delete', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['task/delete', 'id' => $model->id]),
                         [
+                            'class' => 'btn btn-danger',
                             'role'=>'modal-remote',
                             'title' => Yii::t('app', 'Delete'),
                             'data-pjax' => '1',
@@ -97,14 +99,26 @@ return [
             'update' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Pending') {
-                    return Html::a('<span class="glyphicon glyphicon-pencil">&nbsp;</span>', Url::to(['task/update', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['task/update', 'id' => $model->id]),
                         [
+                            'class' => 'btn btn-warning',
                             'role'=>'modal-remote',
                             'title'=>'Update',
-                            'data-toggle'=>'tooltip'
+                            'data-toggle'=>'tooltip',
+                            'style' => 'margin-left:3px',
                         ]
                     );
                 }
+            },
+            'comment' => function ($url, $model, $key) {
+                return Html::button('<span class="fa fa-comment"></span>',
+                    [
+                        'id' => $model->id,
+                        'class' => 'btn btn-success btn-comment',
+                        'style' => 'margin-left:3px',
+                        'title' => Yii::t('app', 'Comment'),
+                    ]
+                );
             },
         ],
         'dropdown' => false,
@@ -112,7 +126,7 @@ return [
         'urlCreator' => function($action, $model, $key, $index) {
             return Url::to([$action,'id'=>$key]);
         },
-        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
+        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip','class'=>'btn btn-primary','style' => 'margin-left:3px',],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
         'deleteOptions'=>['role'=>'modal-remote','title'=>'Done',
             'data-confirm'=>false, 'data-method'=>false,// for overide yii data api

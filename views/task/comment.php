@@ -1,4 +1,3 @@
-<link rel="stylesheet" href="http://fontawesome.io/assets/font-awesome/css/font-awesome.css">
 
 <style type="text/css">
     /* CSS Test begin */
@@ -186,9 +185,7 @@
                     <form id="form-comment">
                         <textarea placeholder="Type your message here..." id="text-comment"></textarea>
                         <ul>
-                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Audio"><i class="fa fa-music"></i></a></li>
-                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Video"><i class="fa fa-video-camera"></i></a></li>
-                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Sound Record"><i class="fa fa-microphone"></i></a></li>
+                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="File"><i class="fa fa-paperclip"></i></a></li>
                             <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
                         </ul>
                         <button type="button" id="<?= $id ?>" class="btn btn-success green submit-comment"><i class="fa fa-share"></i> Share</button>

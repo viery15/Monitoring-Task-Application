@@ -42,7 +42,6 @@
                     <td><?= $data_progress['remark'] ?></td>
                     <td><?= $data_progress['description'] ?></td>
                     <td><?= $data_progress['user_from'] ?></td>
-
                     <td>On Progress</td>
                 </tr>
             <?php } ?>

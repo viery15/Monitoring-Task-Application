@@ -55,15 +55,17 @@ return [
     // ],
     [
         'class' => 'kartik\grid\ActionColumn',
-        'width' => '100px',
-        'template' => ' {done}{approve}{reject}{view}',
+        'width' => '200px',
+        'template' => ' {done}{approve}{reject}{view}{comment}',
 
         'buttons' => [
             'done' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Approved') {
-                    return Html::a('<span class="glyphicon glyphicon-check">&nbsp;</span>', Url::to(['task/done', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-check"></span>', Url::to(['task/done', 'id' => $model->id]),
                         [
+                            'class' => 'btn btn-success',
+                            'style' => 'margin-left:3px',
                             'title' => Yii::t('app', 'Done'),
                             'data-pjax' => '1',
                             'data' => [
@@ -79,8 +81,10 @@ return [
             'approve' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Pending') {
-                    return Html::a('<span class="glyphicon glyphicon-ok">&nbsp;</span>', Url::to(['task/approve', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-ok"></span>', Url::to(['task/approve', 'id' => $model->id]),
                         [
+                            'class' => 'btn btn-info',
+                            'style' => 'margin-left:3px',
                             'title' => Yii::t('app', 'Approve'),
                             'data-pjax' => '1',
                             'data' => [
@@ -95,27 +99,38 @@ return [
             'reject' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
                 if($model->status == 'Pending') {
-                    return Html::a('<span class="glyphicon glyphicon-remove">&nbsp;</span>', Url::to(['task/reject', 'id' => $model->id]),
+                    return Html::a('<span class="glyphicon glyphicon-remove"></span>', Url::to(['task/reject', 'id' => $model->id]),
                         [
+                            'class' => 'btn btn-danger',
+                            'style' => 'margin-left:3px',
                             'title' => Yii::t('app', 'Reject'),
                             'data-pjax' => '1',
                             'data' => [
                                 'method' => 'post',
                                 'confirm' => Yii::t('app', 'Are You Sure ?'),
-//                                'pjax' => 1,
                             ],
                         ]
                     );
                 }
             },
 
+            'comment' => function ($url, $model, $key) {
+                    return Html::button('<span class="fa fa-comment"></span>',
+                        [
+                            'id' => $model->id,
+                            'class' => 'btn btn-success btn-comment',
+                            'style' => 'margin-left:3px',
+                            'title' => Yii::t('app', 'Comment'),
+                        ]
+                    );
+            },
         ],
         'dropdown' => false,
         'vAlign'=>'middle',
         'urlCreator' => function($action, $model, $key, $index) {
                 return Url::to([$action,'id'=>$key]);
         },
-        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip'],
+        'viewOptions'=>['role'=>'modal-remote','title'=>'View','data-toggle'=>'tooltip','class' => 'btn btn-primary','style' => 'margin-left:3px',],
         'updateOptions'=>['role'=>'modal-remote','title'=>'Update', 'data-toggle'=>'tooltip'],
         'deleteOptions'=>['role'=>'modal-remote','title'=>'Done',
                           'data-confirm'=>false, 'data-method'=>false,// for overide yii data api
@@ -124,4 +139,5 @@ return [
                           'data-confirm-title'=>'Are you sure?',
                           'data-confirm-message'=>'Are you sure want to delete this item'],
     ],
-];   
+];
+?>

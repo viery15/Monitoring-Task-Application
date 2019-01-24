@@ -381,12 +381,13 @@ class TaskController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
+//            return $this->redirect(Yii::$app->request->referrer);
             return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
         }else{
             /*
             *   Process for non-ajax request
             */
-//            return $this->redirect(['index']);
+//            return $this->redirect(['myrequest']);
             return $this->redirect(Yii::$app->request->referrer);
         }
     }

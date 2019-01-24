@@ -24,10 +24,10 @@ class SiteController extends Controller
             return [
                 'access' => [
                     'class' => AccessControl::className(),
-                    'only' => ['index','logout','client-create'], // your own action which permission the login
+                    'only' => ['index','logout','client-create','dashboard'], // your own action which permission the login
                     'rules' => [
                         [
-                            'actions' => ['index','logout','client-create'], // your own action which permission the login
+                            'actions' => ['index','logout','client-create','dashboard'], // your own action which permission the login
                             'allow' => true,
                             'roles' => ['@'],
                         ],

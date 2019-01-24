@@ -8,6 +8,16 @@ use yii\widgets\ActiveForm;
 
 <style type="text/css">
     /* CSS Test begin */
+    .image-upload > input
+    {
+        display: none;
+    }
+
+    .image-upload img
+    {
+        width: 80px;
+        cursor: pointer;
+    }
     .comment-box {
         margin-top: 30px !important;
     }
@@ -201,8 +211,8 @@ use yii\widgets\ActiveForm;
                         <ul>
                             <input type="text" value="<?= $id ?>" style="display: none">
                             <input type="file" name="attach" id="attach">
-                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="File"><i class="fa fa-paperclip"></i></a></li>
-                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
+<!--                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="File"><i class="fa fa-paperclip"></i></a></li>-->
+<!--                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>-->
                         </ul>
                         <button type="button" id="<?= $id ?>" class="btn btn-success green submit-comment"><i class="fa fa-share"></i> Share</button>
                     </form>

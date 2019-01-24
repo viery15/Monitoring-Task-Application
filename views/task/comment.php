@@ -2,6 +2,8 @@
 //    use app\models\Comment;
 
 //    $model = new Comment();
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
 ?>
 
 <style type="text/css">
@@ -183,10 +185,10 @@
                 <?php
                 if (isset($data_comment['attachments'])) {
                     ?>
-                    <br><br><?= $data_comment['attachments'] ?>
+                    <br><br>Attachments :<br><i class="fa fa-file"></i>
+                    <?= Html::a($data_comment['attachments'], ['task/unduh', 'id' => $data_comment['id']]); ?>
                 <?php } ?>
             </p>
-
         </div>
     </div>
     <?php } ?>

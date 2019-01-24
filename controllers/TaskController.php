@@ -495,19 +495,25 @@ class TaskController extends Controller
         $file = UploadedFile::getInstanceByName('attach');
 
         if(isset($file)) {
-            $path = Yii::getAlias('@webroot').'/uploads/'.$file->baseName.'.'.$file->extension;
-            $counter = 0;
-            $new_name = $file->baseName;
-            print_r($path);
-            while(file_exists($path)) {
-                $path = $session['user']['username'] . $file->baseName . $counter;
-                $counter++;
-            };
+            $path = Yii::getAlias('@webroot').'/uploads/' . $session['user']['username'] . $file->baseName.'.'.$file->extension;
+            if (file_exists($path)) {
+                $new_name = Yii::getAlias('@webroot').'/uploads/' . $session['user']['username'] . $file->baseName.'.'.$file->extension;
 
-            $model->attachments = $path . '.' . $file->extension;
+                $counter = 1;
+                while(file_exists($new_name)) {
+                    $new_name = Yii::getAlias('@webroot').'/uploads/' . $session['user']['username'] . $counter . $file->baseName . '.' . $file->extension;
+                    $real_name = $session['user']['username'] . $counter . $file->baseName . '.' . $file->extension;
+                    $counter++;
+                };
+            }
+            else {
+                $real_name = $session['user']['username'] . $file->baseName . '.' . $file->extension;
+            }
+
+            $model->attachments = $real_name;
 
             if($model->save()){
-                $file->saveAs('uploads/' . $path . '.' . $file->extension);
+                $file->saveAs('uploads/' . $real_name);
             }
         }
 
@@ -521,5 +527,15 @@ class TaskController extends Controller
             'data_comment' => $data_comment,
         ));
 
+    }
+
+    public function actionUnduh($id)
+    {
+        $download = Comment::findOne($id);
+        $path = Yii::getAlias('@webroot').'/uploads/'.$download->attachments;
+
+        if (file_exists($path)) {
+            return Yii::$app->response->sendFile($path);
+        }
     }
 }

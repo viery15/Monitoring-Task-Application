@@ -470,10 +470,12 @@ class TaskController extends Controller
         $this->layout = false;
         $data = Yii::$app->request->post();
         $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
+        $data_task = Task::find()->where(['id' => $data['id']])->one();
 
         return $this->render('comment',array(
             'id' => $data['id'],
             'data_comment' => $data_comment,
+            'data_task' => $data_task,
         ));
     }
 

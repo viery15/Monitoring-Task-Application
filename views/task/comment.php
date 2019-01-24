@@ -223,8 +223,8 @@ use yii\widgets\ActiveForm;
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
-        $("[data-toggle=tooltip]").tooltip();
-
+        var modalhead = <?php echo json_encode($data_task['remark']); ?>;
+        $("#head-comment").text('Comment Task # '+modalhead);
         $(".submit-comment").click(function(){
             id = $(this).attr("id");
             var comment = $("#text-comment").val();

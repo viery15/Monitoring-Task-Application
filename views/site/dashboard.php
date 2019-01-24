@@ -630,7 +630,6 @@ Modal::end();
 
     $(".btn-comment").click(function(){
         id = $(this).attr("id");
-        $("#head-comment").text('Comment Task #'+id);
         $.ajax({
             url :  "<?php echo Yii::$app->request->baseUrl. '/task/comment' ?>",
             type : 'post',

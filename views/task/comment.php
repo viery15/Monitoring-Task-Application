@@ -184,6 +184,11 @@ use yii\widgets\ActiveForm;
 </style>
 <div class='container'>
     <?php
+        if (!isset($data_comment['user_comment'])) {
+            echo "No comment found.";
+        }
+    ?>
+    <?php
         foreach ($data_comment as $data_comment) {
             $timestamp = strtotime($data_comment['created_at']);
             $new_date = date('d M Y h:i A', $timestamp);

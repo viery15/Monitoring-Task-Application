@@ -275,14 +275,17 @@ $this->params['breadcrumbs'][] = $this->title;
                 <div class="timeline-heading">
                     <h4 class="timeline-title"><?= $row['remark'] ?></h4>
                     <?php
+                    $timestamp = strtotime($row['update_at']);
+                    $new_date = date('d M Y h:i A', $timestamp);
+
                     if ($row['user_from'] == $session['user']['username']) {
                     ?>
-                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?= $row['update_at'] ?> <br>To <b style="color: blue"><?= $row['user_to'] ?></b>
+                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?= $new_date ?> <br>To <b style="color: blue"><?= $row['user_to'] ?></b>
                             <?php
                             }
                             else {
                             ?>
-                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?= $row['update_at'] ?> <br>From <b style="color: blue"><?= $row['user_from'] ?></b>
+                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?= $new_date ?> <br>From <b style="color: blue"><?= $row['user_from'] ?></b>
                             <?php } ?>
                             <?php
                             if ($row['status'] == 'Pending') {

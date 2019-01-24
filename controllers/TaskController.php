@@ -272,13 +272,17 @@ class TaskController extends Controller
 
                 ];
             }else if($model->load($request->post()) && $model->save()){
-                return [
-                    'forceReload'=>'#crud-datatable-pjax',
-                    'title'=> $mode,
-                    'content'=>'<span class="text-success">Create Task success</span>',
-                    'footer'=>Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote']).
-                        Html::button('Close',['class'=>'btn btn-default pull-right','data-dismiss'=>"modal"])
-                ];
+                if($session['task'] == 'myrequest') {
+                    return $this->redirect(['myrequest']);
+                }
+//                return [
+//                    'forceReload'=>'#crud-datatable-pjax',
+//                    'title'=> $mode,
+//                    'content'=>'<span class="text-success">Create Task success</span>',
+//                    'footer'=>Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote']).
+//                        Html::button('Close',['class'=>'btn btn-default pull-right','data-dismiss'=>"modal"])
+//                ];
+
 
             }else{
                 return [
@@ -372,6 +376,8 @@ class TaskController extends Controller
      */
     public function actionDelete($id)
     {
+        $session = Yii::$app->session;
+        $session->open();
         $request = Yii::$app->request;
         Comment::deleteAll('task_id = :id', [':id' => $id]);
 
@@ -383,7 +389,10 @@ class TaskController extends Controller
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
 //            return $this->redirect(Yii::$app->request->referrer);
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+            if($session['task'] == 'myrequest') {
+                return $this->redirect(['myrequest']);
+            }
+//            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
         }else{
             /*
             *   Process for non-ajax request
@@ -414,6 +423,7 @@ class TaskController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
+
             return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
         }else{
             /*
@@ -524,9 +534,11 @@ class TaskController extends Controller
         }
 
         $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
+        $data_task = Task::find()->where(['id' => $data['id']])->one();
         return $this->render('comment',array(
             'id' => $data['id'],
             'data_comment' => $data_comment,
+            'data_task' => $data_task,
         ));
 
     }

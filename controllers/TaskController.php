@@ -13,6 +13,7 @@ use yii\filters\VerbFilter;
 use \yii\web\Response;
 use yii\helpers\Html;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 
 
@@ -480,20 +481,45 @@ class TaskController extends Controller
         $this->layout = false;
         $session = Yii::$app->session;
         $session->open();
-        $data = Yii::$app->request->post();
 
         $model = new Comment();
+        $data = Yii::$app->request->post();
+//        print_r($data);
+//        print_r($_FILES);
+
         $model->user_comment = $session['user']['username'];
         $model->task_id = $data['id'];
         $model->comments = $data['comment'];
 //        $model->attachments = '';
         $model->created_at = date('m-d-Y H:i:s');
-        $model->save();
-        $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
+        $file = UploadedFile::getInstanceByName('attach');
 
+        if(isset($file)) {
+            $path = Yii::getAlias('@webroot').'/uploads/'.$file->baseName.'.'.$file->extension;
+            $counter = 0;
+            $new_name = $file->baseName;
+            print_r($path);
+            while(file_exists($path)) {
+                $path = $session['user']['username'] . $file->baseName . $counter;
+                $counter++;
+            };
+
+            $model->attachments = $path . '.' . $file->extension;
+
+            if($model->save()){
+                $file->saveAs('uploads/' . $path . '.' . $file->extension);
+            }
+        }
+
+        else {
+            $model->save();
+        }
+
+        $data_comment = Comment::find()->where(['task_id' => $data['id']])->all();
         return $this->render('comment',array(
             'id' => $data['id'],
             'data_comment' => $data_comment,
         ));
+
     }
 }

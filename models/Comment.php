@@ -34,6 +34,7 @@ class Comment extends \yii\db\ActiveRecord
             [['user_comment', 'comments', 'attachments'], 'string'],
             [['task_id'], 'number'],
             [['created_at'], 'safe'],
+            [['attachments'], 'file', 'skipOnEmpty' => true],
         ];
     }
 

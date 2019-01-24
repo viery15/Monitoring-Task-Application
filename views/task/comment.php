@@ -1,3 +1,8 @@
+<?php
+//    use app\models\Comment;
+
+//    $model = new Comment();
+?>
 
 <style type="text/css">
     /* CSS Test begin */
@@ -174,7 +179,14 @@
     <div class="media comment-box" style="width: 73%">
         <div class="media-body">
             <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
-            <p><?= $data_comment['comments']; ?></p>
+            <p><?= $data_comment['comments']; ?>
+                <?php
+                if (isset($data_comment['attachments'])) {
+                    ?>
+                    <br><br><?= $data_comment['attachments'] ?>
+                <?php } ?>
+            </p>
+
         </div>
     </div>
     <?php } ?>
@@ -182,9 +194,11 @@
         <div class="col-md-6">
             <div class="widget-area no-padding blank">
                 <div class="status-upload">
-                    <form id="form-comment">
-                        <textarea placeholder="Type your message here..." id="text-comment"></textarea>
+                    <form id="form-comment" type="post" enctype="multipart/form-data" name="form">
+                        <textarea placeholder="Type your message here..." id="text-comment" name="comment"></textarea>
                         <ul>
+                            <input type="text" value="<?= $id ?>" style="display: none">
+                            <input type="file" name="attach" id="attach">
                             <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="File"><i class="fa fa-paperclip"></i></a></li>
                             <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>
                         </ul>
@@ -202,13 +216,20 @@
         $(".submit-comment").click(function(){
             id = $(this).attr("id");
             var comment = $("#text-comment").val();
-//            alert(comment);
+            var form = $('form')[1]; // You need to use standard javascript object here
+            var formData = new FormData(form);
+            formData.append('id', id);
             $.ajax({
                url : "<?php echo Yii::$app->request->baseUrl. '/task/submitcomment' ?>",
                 type : 'post',
-                data : {id:id,comment:comment},
+//                data : {id:id,comment:comment},
+                data : formData,
+                cache: false,
+                contentType: false,
+                processData: false,
                 success : function(e){
                     $('#comment-content').html(e);
+//                    alert(e);
                 }
             });
         });

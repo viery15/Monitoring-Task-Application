@@ -706,7 +706,7 @@ Modal::end();
                 chart: {
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
-                    width:510,
+//                    width:510,
                     plotShadow: false,
                     type: 'pie'
                 },
@@ -762,7 +762,7 @@ Modal::end();
             Highcharts.chart('container2', {
                 chart: {
                     plotBackgroundColor: null,
-                    width:490,
+//                    width:490,
                     plotBorderWidth: null,
                     plotShadow: false,
                     type: 'pie'

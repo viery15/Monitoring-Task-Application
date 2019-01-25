@@ -61,7 +61,7 @@ return [
         'buttons' => [
             'done' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Approved') {
+                if($model->status == 'progress') {
                     return Html::a('<span class="glyphicon glyphicon-check"></span>', Url::to(['task/done', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-success',
@@ -80,7 +80,7 @@ return [
 
             'approve' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Pending') {
+                if($model->status == 'pending') {
                     return Html::a('<span class="glyphicon glyphicon-ok"></span>', Url::to(['task/approve', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-info',
@@ -98,7 +98,7 @@ return [
             },
             'reject' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Pending') {
+                if($model->status == 'pending') {
                     return Html::a('<span class="glyphicon glyphicon-remove"></span>', Url::to(['task/reject', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-danger',

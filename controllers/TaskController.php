@@ -105,7 +105,7 @@ class TaskController extends Controller
 
     public function actionDone($id){
         $task = Task::findOne($id);
-        $task->status = 'Done';
+        $task->status = 'done';
         $task->update_at = date('m-d-Y H:i:s');
         $task->save();
 
@@ -115,7 +115,7 @@ class TaskController extends Controller
 
     public function actionApprove($id){
         $model = Task::findOne($id);
-        $model->status = 'Approved';
+        $model->status = 'progress';
         $model->update_at = date('m-d-Y H:i:s');
         $model->save();
 
@@ -125,7 +125,7 @@ class TaskController extends Controller
 
     public function actionReject($id) {
         $model = Task::findOne($id);
-        $model->status = 'Rejected';
+        $model->status = 'rejected';
         $model->update_at = date('m-d-Y H:i:s');
         $model->save();
 
@@ -134,7 +134,7 @@ class TaskController extends Controller
 
     public function actionRequest($id) {
         $model = Task::findOne($id);
-        $model->status = 'Pending';
+        $model->status = 'pending';
         $model->update_at = date('m-d-Y H:i:s');
         $model->save();
 
@@ -201,9 +201,13 @@ class TaskController extends Controller
         $model->update_at = date('m-d-Y H:i:s');
         $model->create_at = date('m-d-Y H:i:s');
 
-        $model->save();
-        return $this->redirect(Yii::$app->request->referrer);
-        print_r($model);
+
+            if($model->validate()) {
+                $model->save();
+                return $this->redirect(Yii::$app->request->referrer);
+            }
+//            print_r($model);
+
     }
 
     /**
@@ -461,11 +465,11 @@ class TaskController extends Controller
         $data = Yii::$app->request->post();
         $nik = $data['nik'];
 
-        $data_done = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'Done'])->orderBy(['status' => SORT_ASC])->all();
-        $data_progress = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'Approved'])->orderBy(['status' => SORT_ASC])->all();
+        $data_done = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'done'])->orderBy(['status' => SORT_ASC])->all();
+        $data_progress = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'progress'])->orderBy(['status' => SORT_ASC])->all();
 
-        $mystatus[0] = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'Done'])->count();
-        $mystatus[1] = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'Approved'])->count();
+        $mystatus[0] = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'done'])->count();
+        $mystatus[1] = Task::find()->where(['user_to' => $nik])->andWhere(['status' => 'progress'])->count();
 
 //        print_r($data_task);
         return $this->render('table_monitoring',array(

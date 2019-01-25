@@ -66,7 +66,7 @@ if (isset($id)) {
 
     <?= $form->field($model, 'remark')->textInput() ?>
 
-    <?= $form->field($model, 'status')->hiddenInput(['readonly' => true, 'value' => 'Pending'])->label(false) ?>
+    <?= $form->field($model, 'status')->hiddenInput(['readonly' => true, 'value' => 'pending'])->label(false) ?>
 
     <?= $form->field($model, 'description')->textArea() ?>
 

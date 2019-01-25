@@ -63,7 +63,7 @@ return [
         'buttons' => [
             'request' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Rejected') {
+                if($model->status == 'rejected') {
                     return Html::a('<span class="glyphicon glyphicon-repeat"></span>', Url::to(['task/request', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-warning',
@@ -80,7 +80,7 @@ return [
             },
             'delete' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Pending') {
+                if($model->status == 'pending') {
                     return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['task/delete', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-danger',
@@ -98,7 +98,7 @@ return [
             },
             'update' => function ($url, $model, $key) {
 //                if (Yii::$app->user->identity->id != $model->id) {
-                if($model->status == 'Pending') {
+                if($model->status == 'pending') {
                     return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Url::to(['task/update', 'id' => $model->id]),
                         [
                             'class' => 'btn btn-warning',

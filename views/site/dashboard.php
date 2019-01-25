@@ -242,28 +242,28 @@ $this->params['breadcrumbs'][] = $this->title;
             <?php } ?>
 
             <?php
-            if ($row['status'] == 'Pending') {
+            if ($row['status'] == 'pending') {
                 ?>
                 <div class="timeline-badge warning"><i class="glyphicon glyphicon-thumbs-up"></i></div>
                 <?php
             }
             ?>
             <?php
-            if ($row['status'] == 'Done') {
+            if ($row['status'] == 'done') {
                 ?>
                 <div class="timeline-badge success"><i class="glyphicon glyphicon-thumbs-up"></i></div>
                 <?php
             }
             ?>
             <?php
-            if ($row['status'] == 'Rejected') {
+            if ($row['status'] == 'rejected') {
                 ?>
                 <div class="timeline-badge danger"><i class="glyphicon glyphicon-thumbs-up"></i></div>
                 <?php
             }
             ?>
             <?php
-            if ($row['status'] == 'Approved') {
+            if ($row['status'] == 'progress') {
                 ?>
                 <div class="timeline-badge info"><i class="glyphicon glyphicon-thumbs-up"></i></div>
                 <?php
@@ -288,28 +288,28 @@ $this->params['breadcrumbs'][] = $this->title;
                     <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> <?= $new_date ?> <br>From <b style="color: blue"><?= $row['user_from'] ?></b>
                             <?php } ?>
                             <?php
-                            if ($row['status'] == 'Pending') {
+                            if ($row['status'] == 'pending') {
                                 ?>
                                 status : <span style="color: darkgoldenrod"><b><?= $row['status'] ?></b></span>
                                 <?php
                             }
                             ?>
                             <?php
-                            if ($row['status'] == 'Done') {
+                            if ($row['status'] == 'done') {
                                 ?>
                                 status : <span style="color: darkgreen"><b><?= $row['status'] ?></b></span>
                                 <?php
                             }
                             ?>
                             <?php
-                            if ($row['status'] == 'Rejected') {
+                            if ($row['status'] == 'rejected') {
                                 ?>
                                 status : <span style="color: red"><b><?= $row['status'] ?></b></span>
                                 <?php
                             }
                             ?>
                             <?php
-                            if ($row['status'] == 'Approved') {
+                            if ($row['status'] == 'progress') {
                             ?>
                             status : <b style="color: dodgerblue"><b><?= $row['status'] ?></b></span>
                                 <?php
@@ -325,7 +325,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="btn-group">
 
                         <?php
-                        if ($row['status'] == 'Pending' && $row['user_from'] != $session['user']['username']) {
+                        if ($row['status'] == 'pending' && $row['user_from'] != $session['user']['username']) {
 
                             ?>
                             <!--                        <button type="button" class="btn btn-primary btn-sm">-->
@@ -387,7 +387,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                        if ($row['status'] == 'Approved' && $row['user_from'] != $session['user']['username']) {
+                        if ($row['status'] == 'progress' && $row['user_from'] != $session['user']['username']) {
 
                             ?>
                             <!--                            <button type="button" class="btn btn-success btn-sm">-->
@@ -426,7 +426,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                        if ($row['status'] == 'Pending' && $row['user_from'] == $session['user']['username']) {
+                        if ($row['status'] == 'pending' && $row['user_from'] == $session['user']['username']) {
 
                             $idx++;
                             ?>
@@ -482,7 +482,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                        if ($row['status'] == 'Rejected' && $row['user_from'] == $session['user']['username']) {
+                        if ($row['status'] == 'rejected' && $row['user_from'] == $session['user']['username']) {
 
                             ?>
                             <!--                            <button type="button" class="btn btn-warning btn-sm">-->
@@ -522,7 +522,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                            if ($row['status'] == 'Done' && $row['user_to'] == $session['user']['username']) {
+                            if ($row['status'] == 'done' && $row['user_to'] == $session['user']['username']) {
                         ?>
                                 <?=
                                 Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
@@ -537,7 +537,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                        if ($row['status'] == 'Approved' && $row['user_from'] == $session['user']['username']) {
+                        if ($row['status'] == 'progress' && $row['user_from'] == $session['user']['username']) {
                             ?>
                             <?=
                             Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
@@ -552,7 +552,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?php } ?>
 
                         <?php
-                        if ($row['status'] == 'Done' && $row['user_from'] == $session['user']['username']) {
+                        if ($row['status'] == 'done' && $row['user_from'] == $session['user']['username']) {
                             ?>
                             <?=
                             Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',
@@ -566,7 +566,7 @@ $this->params['breadcrumbs'][] = $this->title;
                             ?>
                         <?php } ?>
                         <?php
-                        if ($row['status'] == 'Rejected' && $row['user_to'] == $session['user']['username']) {
+                        if ($row['status'] == 'rejected' && $row['user_to'] == $session['user']['username']) {
                             ?>
                             <?=
                             Html::button('<span class="glyphicon glyphicon-comment"></span> Comment',

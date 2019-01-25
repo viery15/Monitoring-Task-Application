@@ -167,16 +167,16 @@ class SiteController extends Controller
         $session->open();
 
         //count my task
-        $mytask[0] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'Pending'])->count();
-        $mytask[1] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'Rejected'])->count();
-        $mytask[2] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'Approved'])->count();
-        $mytask[3] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'Done'])->count();
+        $mytask[0] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'pending'])->count();
+        $mytask[1] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'rejected'])->count();
+        $mytask[2] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'progress'])->count();
+        $mytask[3] = Task::find()->where(['user_to' => $session['user']['username']])->andWhere(['status' => 'done'])->count();
 
         //count my request
-        $myrequest[0] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'Pending'])->count();
-        $myrequest[1] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'Rejected'])->count();
-        $myrequest[2] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'Approved'])->count();
-        $myrequest[3] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'Done'])->count();
+        $myrequest[0] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'pending'])->count();
+        $myrequest[1] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'rejected'])->count();
+        $myrequest[2] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'progress'])->count();
+        $myrequest[3] = Task::find()->where(['user_from' => $session['user']['username']])->andWhere(['status' => 'done'])->count();
 
         $data = Task::find()->where(['user_from' => $session['user']['username']])->orWhere(['user_to' => $session['user']['username']])->limit(10)->orderBy(['update_at' => SORT_DESC])->all();
 //        return $this->render('dashboard');

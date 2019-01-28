@@ -191,7 +191,7 @@ class SiteController extends Controller
     public function actionUserguide(){
 //        $download = Comment::findOne($id);
         $path = Yii::getAlias('@webroot').'/uploads/'.'user_guide.pdf';
-        
+
         return Yii::$app->response->sendFile($path);
     }
 }

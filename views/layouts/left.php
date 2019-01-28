@@ -46,6 +46,7 @@ $session->open();
                         ],
                     ],
                         ['label' => 'User', 'icon' => 'user', 'url' => ['user/']],
+                        ['label' => 'User Guide', 'icon' => 'file', 'url' => ['site/userguide']],
                 ],
             ]
         ) ?> <?php } ?>
@@ -75,7 +76,7 @@ $session->open();
                                 ['label' => 'Employee Task', 'icon' => 'list-alt', 'url' => ['task/monitoring'],],
                             ],
                         ],
-
+                        ['label' => 'User Guide', 'icon' => 'file', 'url' => ['site/userguide']],
 //                        ['label' => 'User', 'icon' => 'user', 'url' => ['user/index']],
 
                     ],

@@ -191,6 +191,7 @@ use yii\widgets\ActiveForm;
     <div class="media comment-box" style="width: 73%">
         <div class="media-body">
             <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
+            <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
             <p><?= $data_comment['comments']; ?>
                 <?php
                 if (isset($data_comment['attachments'])) {
@@ -214,7 +215,7 @@ use yii\widgets\ActiveForm;
 <!--                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="File"><i class="fa fa-paperclip"></i></a></li>-->
 <!--                            <li><a title="" data-toggle="tooltip" data-placement="bottom" data-original-title="Picture"><i class="fa fa-picture-o"></i></a></li>-->
                         </ul>
-                        <button type="button" id="<?= $id ?>" class="btn btn-success green submit-comment"><i class="fa fa-share"></i> Share</button>
+                        <button type="button" id="<?= $id ?>" class="btn btn-success green submit-comment"><i class="fa fa-share"></i> Submit</button>
                     </form>
                 </div><!-- Status Upload  -->
             </div><!-- Widget Area -->

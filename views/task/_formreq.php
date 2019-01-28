@@ -22,10 +22,10 @@ $session->open();
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model,'date_from')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
+            <?= $form->field($model,'date_from')->label('Date From *')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model,'date_to')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
+            <?= $form->field($model,'date_to')->label('Date To *')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
         </div>
     </div>
 
@@ -36,23 +36,23 @@ $session->open();
     <?php
     if ($session['task'] == 'mytask') {
     ?>
-        <?=$form->field($model, 'user_from')->dropDownList($dataList,
+        <?=$form->field($model, 'user_from')->label('User From *')->dropDownList($dataList,
             ['prompt'=>'-Assign To-']) ?>
 
         <?= $form->field($model, 'user_to')->hiddenInput(['readonly' => true, 'value' => $session['user']['username']])->label(false) ?>
         
     <?php } else {?>
-        <?=$form->field($model, 'user_to')->dropDownList($dataList,
+        <?=$form->field($model, 'user_to')->label('Assign To *')->dropDownList($dataList,
             ['prompt'=>'-Assign To-']) ?>
 
         <?= $form->field($model, 'user_from')->hiddenInput(['readonly' => true, 'value' => $session['user']['username']])->label(false) ?>
     <?php } ?>
 
-    <?= $form->field($model, 'remark')->textInput() ?>
+    <?= $form->field($model, 'remark')->label('Remark *')->textInput() ?>
 
     <?= $form->field($model, 'status')->hiddenInput(['readonly' => true, 'value' => 'pending'])->label(false) ?>
 
-    <?= $form->field($model, 'description')->textArea() ?>
+    <?= $form->field($model, 'description')->label('Description *')->textArea() ?>
 
     <?= $form->field($model, 'update_at')->hiddenInput()->label(false) ?>
 

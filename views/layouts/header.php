@@ -31,7 +31,12 @@ $session->open();
                             <img src="<?= $directoryAsset ?>/img/user2-160x160.jpg" class="img-circle"
                                  alt="User Image"/>
                         </li>
+
                         <li class="user-footer">
+                            <div class="pull-left">
+                                <small class="text-muted">Last login : <?= $session['user']['last_login'] ?></small>
+
+                            </div>
                             <div class="pull-right">
                                 <?= Html::a(
                                     'Sign out',

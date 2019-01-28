@@ -218,17 +218,44 @@ class TaskController extends Controller
 
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+        $session = Yii::$app->session;
+        $session->open();
         $request = Yii::$app->request;
+
         if($request->isAjax){
             Yii::$app->response->format = Response::FORMAT_JSON;
-            return [
-                'title'=> "Task #".$id,
-                'content'=>$this->renderAjax('view', [
-                    'model' => $this->findModel($id),
-                ]),
-                'footer'=> Html::button('Close',['class'=>'btn btn-default pull-left','data-dismiss'=>"modal"]).
-                    Html::a('Edit',['update','id'=>$id],['class'=>'btn btn-primary','role'=>'modal-remote'])
-            ];
+            if ($session['task'] == 'myrequest') {
+                if ($model->status == 'pending') {
+                    return [
+                        'title' => "Task #" . $id,
+                        'content' => $this->renderAjax('view', [
+                            'model' => $this->findModel($id),
+                        ]),
+                        'footer' =>
+                            Html::a('Edit', ['update', 'id' => $id], ['class' => 'btn btn-primary', 'role' => 'modal-remote']).
+                        Html::button('Close', ['class' => 'btn btn-default', 'data-dismiss' => "modal"])
+                    ];
+                }
+                else {
+                    return [
+                        'title' => "Task #" . $id,
+                        'content' => $this->renderAjax('view', [
+                            'model' => $this->findModel($id),
+                        ]),
+                        'footer' => Html::button('Close', ['class' => 'btn btn-default pull-right', 'data-dismiss' => "modal"])
+                    ];
+                }
+            }
+            else if($session['task'] == 'mytask') {
+                return [
+                    'title' => "Task #" . $id,
+                    'content' => $this->renderAjax('view', [
+                        'model' => $this->findModel($id),
+                    ]),
+                    'footer' => Html::button('Close', ['class' => 'btn btn-default pull-right', 'data-dismiss' => "modal"])
+                ];
+            }
         }else{
             return $this->render('view', [
                 'model' => $this->findModel($id),
@@ -276,16 +303,16 @@ class TaskController extends Controller
 
                 ];
             }else if($model->load($request->post()) && $model->save()){
-                if($session['task'] == 'myrequest') {
-                    return $this->redirect(['myrequest']);
-                }
-//                return [
-//                    'forceReload'=>'#crud-datatable-pjax',
-//                    'title'=> $mode,
-//                    'content'=>'<span class="text-success">Create Task success</span>',
-//                    'footer'=>Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote']).
-//                        Html::button('Close',['class'=>'btn btn-default pull-right','data-dismiss'=>"modal"])
-//                ];
+//                if($session['task'] == 'myrequest') {
+//                    return $this->redirect(['myrequest']);
+//                }
+                return [
+                    'forceReload'=>'#crud-datatable-pjax',
+                    'title'=> $mode,
+                    'content'=>'<span class="text-success">Create Task success</span>',
+                    'footer'=>Html::a('Create More',['create'],['class'=>'btn btn-primary','role'=>'modal-remote']).
+                        Html::button('Close',['class'=>'btn btn-default pull-right','data-dismiss'=>"modal"])
+                ];
 
 
             }else{
@@ -392,17 +419,19 @@ class TaskController extends Controller
             *   Process for ajax request
             */
             Yii::$app->response->format = Response::FORMAT_JSON;
-//            return $this->redirect(Yii::$app->request->referrer);
-            if($session['task'] == 'myrequest') {
-                return $this->redirect(['myrequest']);
-            }
-//            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+//            if($session['task'] == 'myrequest') {
+//                return $this->redirect(['myrequest']);
+//            }
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+//            return $this->redirect(['myrequest']);
         }else{
             /*
             *   Process for non-ajax request
             */
+            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
 //            return $this->redirect(['myrequest']);
-            return $this->redirect(Yii::$app->request->referrer);
+//            return $this->redirect(['myrequest']);
+//            return $this->redirect(Yii::$app->request->referrer);
         }
     }
 

@@ -167,13 +167,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="row" style="background-color: white;margin: 0px;padding-bottom: 1%">
     <div class="col-md-6">
-        <h3 style="text-align: center">My Task</h3>
+
         <div id="canvas-holder">
             <div id="container2" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         </div>
     </div>
     <div class="col-md-6">
-        <h3 style="text-align: center">My Request</h3>
+
         <div id="canvas-holder">
             <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; margin: 0 auto"></div>
         </div>
@@ -650,7 +650,7 @@ Modal::end();
         e.preventDefault();
         $("#buttonmode").html(buttonmode);
         $("#_mode").val("task");
-        $("#labelselect").html("Assign From");
+        $("#labelselect").html("Assign From *");
         $("#modal-head").text(buttonmode);
         $('#create-request').modal('show');
     });
@@ -659,7 +659,7 @@ Modal::end();
         $("#form-add")[0].reset();
         buttonmode = 'Add New My Request';
         e.preventDefault();
-        $("#labelselect").html("Assign To");
+        $("#labelselect").html("Assign To *");
         $("#modal-head").text(buttonmode);
         $("#buttonmode").html(buttonmode);
         $("#_mode").val("request");
@@ -677,7 +677,7 @@ Modal::end();
                 $("#form-add")[0].reset();
                 buttonmode = 'Update Request';
                 $("#update-content").html(a);
-                $("#labelselect").html("Assign To");
+                $("#labelselect").html("Assign To *");
                 $("#head-update").text(buttonmode);
                 $("#buttonmode").html(buttonmode);
                 $("#_mode").val("request");
@@ -696,7 +696,9 @@ Modal::end();
     });
 
 </script>
+
     <script>
+        var dt = '<?php echo date("d M Y", strtotime($session['user']['last_login'])) ?>';
         $(function () {
             Highcharts.setOptions({
                 colors: ['#ffe700', '#f03f20','#308dc5','#45e521',]
@@ -711,7 +713,7 @@ Modal::end();
                     type: 'pie'
                 },
                 title: {
-                    text: 'Summary'
+                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Tasks per '+ dt
                 },
 
                 plotOptions: {
@@ -739,7 +741,7 @@ Modal::end();
                         sliced: true,
                         selected: true
                     }, {
-                        name: 'UnApproved',
+                        name: 'Unapproved',
                         y: <?php echo json_encode($myrequest[1],JSON_NUMERIC_CHECK) ?>,
                     },{
                         name: 'On Progress',
@@ -768,7 +770,7 @@ Modal::end();
                     type: 'pie'
                 },
                 title: {
-                    text: 'Summary'
+                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Requests per '+ dt
                 },
 
                 plotOptions: {
@@ -796,7 +798,7 @@ Modal::end();
                         sliced: true,
                         selected: true
                     }, {
-                        name: 'UnApproved',
+                        name: 'Unapproved',
                         y: <?php echo json_encode($mytask[1],JSON_NUMERIC_CHECK) ?>,
                     },{
                         name: 'On Progress',

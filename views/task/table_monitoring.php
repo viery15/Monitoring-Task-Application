@@ -23,7 +23,7 @@
         <table id="example" class="table table-striped table-bordered" style="width:100%">
             <thead>
             <tr>
-                <th scope="col">Date</th>
+                <th scope="col">Date Start</th>
                 <th scope="col">Remark</th>
                 <th scope="col">Description</th>
                 <th scope="col">Assign From</th>
@@ -38,7 +38,7 @@
                 $date_to = strtotime($data_progress['date_to']);
                 ?>
                 <tr>
-                    <td><?php echo date('d M Y', $date_from); ?> - <?php echo date('d M Y', $date_to); ?></td>
+                    <td><?php echo date('d M Y', $date_from); ?></td>
                     <td><?= $data_progress['remark'] ?></td>
                     <td><?= $data_progress['description'] ?></td>
                     <td><?= $data_progress['user_from'] ?></td>
@@ -51,12 +51,12 @@
                 $date_to = strtotime($data_done['date_to']);
                 ?>
                 <tr>
-                    <td><?php echo date('d M Y', $date_from); ?> - <?php echo date('d M Y', $date_to); ?></td>
+                    <td><?php echo date('d M Y', $date_from); ?></td>
                     <td><?= $data_done['remark'] ?></td>
                     <td><?= $data_done['description'] ?></td>
                     <td><?= $data_done['user_from'] ?></td>
 
-                    <td><?= $data_done['status'] ?></td>
+                    <td>Done</td>
                 </tr>
             <?php } ?>
 
@@ -89,7 +89,7 @@
                 type: 'pie'
             },
             title: {
-                text: 'Summary Of <?= $nik ?>'
+                text: 'Summary of '+ <?= $nik ?>+'\'s Tasks'
             },
 
             plotOptions: {

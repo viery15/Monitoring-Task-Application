@@ -33,13 +33,13 @@ if (isset($id)) {
     <div class="row">
         <div class='col-sm-6'>
             <div class="form-group">
-                <label>Date From</label>
+                <label>Date From *</label>
                 <input name="date_from" value="<?= $model['date_from'] ?>" type="text" id="datepicker" class="form-control datepicker1" placeholder="Choose">
             </div>
         </div>
         <div class='col-sm-6'>
             <div class="form-group">
-                <label>Date To</label>
+                <label>Date To *</label>
                 <input name="date_to" value="<?= $model['date_to'] ?>" type="text" class="form-control datepicker1" placeholder="Choose">
             </div>
         </div>
@@ -52,23 +52,23 @@ if (isset($id)) {
     <?php
     if ($session['task'] == 'mytask') {
     ?>
-        <?=$form->field($model, 'user_from')->dropDownList($dataList,
+        <?=$form->field($model, 'user_from')->label('Assign from *')->dropDownList($dataList,
             ['prompt'=>'-Assign To-']) ?>
 
         <?= $form->field($model, 'user_to')->hiddenInput(['readonly' => true, 'value' => $session['user']['username']])->label(false) ?>
         
     <?php } else {?>
-        <?=$form->field($model, 'user_to')->dropDownList($dataList,
+        <?=$form->field($model, 'user_to')->label('Assign To *')->dropDownList($dataList,
             ['prompt'=>'-Assign To-']) ?>
 
         <?= $form->field($model, 'user_from')->hiddenInput(['readonly' => true, 'value' => $session['user']['username']])->label(false) ?>
     <?php } ?>
 
-    <?= $form->field($model, 'remark')->textInput() ?>
+    <?= $form->field($model, 'remark')->label('Remark *')->textInput() ?>
 
     <?= $form->field($model, 'status')->hiddenInput(['readonly' => true, 'value' => 'pending'])->label(false) ?>
 
-    <?= $form->field($model, 'description')->textArea() ?>
+    <?= $form->field($model, 'description')->label('Description *')->textArea() ?>
 
     <?= $form->field($model, 'update_at')->hiddenInput()->label(false) ?>
 

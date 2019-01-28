@@ -86,11 +86,13 @@ class SiteController extends Controller
             if ($model->load(Yii::$app->request->post()) && $model->login()) {
                 $userdata = User::find()->where(['id'=>Yii::$app->user->getId()])->asArray()->all();
                 // print_r($userdata);
+                $new_date = date('d M Y h:i A');
                 $session['user'] = array(
                         "login" => true,
                         "id"=>$userdata[0]['id'],
                         "username"=>$userdata[0]['nik'],
                         "role"=>$userdata[0]['role'],
+                        "last_login"=>$new_date,
                     );
 
                 if ($userdata[0]['role'] == 'admin') {

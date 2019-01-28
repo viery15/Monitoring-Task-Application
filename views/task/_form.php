@@ -19,10 +19,10 @@ $session->open();
 
     <div class="row">
         <div class="col-md-6">
-            <?= $form->field($model,'date_from')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
+            <?= $form->field($model,'date_from')->label('Date From *')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
         </div>
         <div class="col-md-6">
-            <?= $form->field($model,'date_to')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
+            <?= $form->field($model,'date_to')->label('Date To *')->widget(DatePicker::className(),['dateFormat' => 'MM/dd/yyyy', 'options' => ['class' => 'form-control','autocomplete' => 'off']]) ?>
         </div>
     </div>
 
@@ -46,11 +46,11 @@ $session->open();
             </select>
         </div>
 
-    <?= $form->field($model, 'remark')->textInput() ?>
+    <?= $form->field($model, 'remark')->textInput()->label('Remark *') ?>
 
     <?= $form->field($model, 'status')->hiddenInput(['readonly' => true, 'value' => 'pending'])->label(false) ?>
 
-    <?= $form->field($model, 'description')->textArea() ?>
+    <?= $form->field($model, 'description')->textArea()->label('Description *') ?>
 
     <?= $form->field($model, 'update_at')->hiddenInput()->label(false) ?>
 

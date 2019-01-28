@@ -3,9 +3,12 @@ use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
+//$this->registerJsFile("@web/js/jquery-1.11.1.min.js");
+//$this->registerJsFile("@web/js/select2.min.js");
 
+//$this->registerJsFile('js/select2.min.js', ['depends' => [yii\web\JqueryAsset::className()]]);
 
-if (Yii::$app->controller->action->id === 'login') { 
+if (Yii::$app->controller->action->id === 'login') {
 /**
  * Do not use this code in your template. Remove it. 
  * Instead, use the code  $this->layout = '//main-login'; in your controller.

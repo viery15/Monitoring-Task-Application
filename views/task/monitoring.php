@@ -10,7 +10,10 @@ use app\assets\HighChartsAsset;
 
 $this->title = 'Monitoring';
 $this->params['breadcrumbs'][] = $this->title;
+
+$this->registerJsFile("@web/js/jquery-1.11.1.min.js");
 $this->registerCssFile("@web/css/select2.min.css");
+$this->registerJsFile("@web/js/select2.min.js");
 
 ?>
 

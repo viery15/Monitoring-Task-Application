@@ -191,7 +191,6 @@ use yii\widgets\ActiveForm;
     <div class="media comment-box" style="width: 73%">
         <div class="media-body">
             <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
-            <h4 class="media-heading"><?= $data_comment['user_comment']; ?> <small class="text-muted"> - <?= $new_date ?></small></h4>
             <p><?= $data_comment['comments']; ?>
                 <?php
                 if (isset($data_comment['attachments'])) {

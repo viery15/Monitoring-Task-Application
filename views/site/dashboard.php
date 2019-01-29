@@ -692,6 +692,14 @@ Modal::end();
             url : "<?php echo Yii::$app->request->baseUrl. '/task/create2' ?>",
             type : "post",
             data : $("#form-add").serialize(),
+            success : function(html){
+                if(html == 'fail') {
+                    alert('Lengkapi form yang tersedia');
+                }
+            },
+//            error : function(){
+//                alert('Lengkapi form yang tersedia');
+//            }
         });
     });
 

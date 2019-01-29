@@ -188,11 +188,16 @@ class TaskController extends Controller
 //        print_r($data['_mode']); exit;
         if ($data['_mode'] == 'task') {
             $model->user_to = $session['user']['username'];
-            $model->user_from = $data['user_value'];
+            if (isset($data['user_value'])) {
+                $model->user_from = $data['user_value'];
+            }
         }
         else {
             $model->user_from = $session['user']['username'];
-            $model->user_to = $data['user_value'];
+            if (isset($data['user_value'])) {
+                $model->user_to = $data['user_value'];
+            }
+
         }
 
         $model->remark = $data['Task']['remark'];
@@ -206,7 +211,9 @@ class TaskController extends Controller
                 $model->save();
                 return $this->redirect(Yii::$app->request->referrer);
             }
-//            print_r($model);
+            else {
+                echo "fail";
+            }
 
     }
 
@@ -428,10 +435,10 @@ class TaskController extends Controller
             /*
             *   Process for non-ajax request
             */
-            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
+//            return ['forceClose'=>true,'forceReload'=>'#crud-datatable-pjax'];
 //            return $this->redirect(['myrequest']);
 //            return $this->redirect(['myrequest']);
-//            return $this->redirect(Yii::$app->request->referrer);
+            return $this->redirect(Yii::$app->request->referrer);
         }
     }
 

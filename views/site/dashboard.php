@@ -721,7 +721,7 @@ Modal::end();
                     type: 'pie'
                 },
                 title: {
-                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Tasks per '+ dt
+                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Request per '+ dt
                 },
 
                 plotOptions: {
@@ -778,7 +778,7 @@ Modal::end();
                     type: 'pie'
                 },
                 title: {
-                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Requests per '+ dt
+                    text: 'Summary of '+ <?= $session['user']['username'] ?>+'\'s Tasks per '+ dt
                 },
 
                 plotOptions: {
